@@ -3,9 +3,8 @@ using UnityEngine.Rendering.HighDefinition;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject _PlayerBody;
-    [SerializeField] GameObject _DecalProjectorObject;
+    [SerializeField] GameObject _Player2D;
     [SerializeField] GameObject _WallCollider;
-    [SerializeField] DecalProjector _DecalProjector; 
     bool _PlayerIs3D = true; 
 
     //Player Movement
@@ -23,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
         _myRigidbody = this.gameObject.GetComponent<Rigidbody>();
         
         _PlayerBody.SetActive(_PlayerIs3D);
-        _DecalProjectorObject.SetActive(!_PlayerIs3D);
+        //_Player2D.SetActive(!_PlayerIs3D);
 
         _startSpeed = _speed;
         _halfSpeed = _speed * .75f;
@@ -35,18 +34,18 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Move()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float xDir = Input.GetAxis("Horizontal");
+        float zDir = Input.GetAxis("Vertical");
         
         if (!_PlayerIs3D)
-            z = 0;
+            zDir = 0;
 
-        if (x != 0 && z != 0)
+        if (xDir != 0 && zDir != 0)
             _speed = _halfSpeed;
         else
             _speed = _startSpeed;
 
-        move = transform.right * x * _acceleration + transform.forward * z * _acceleration;
+        move = transform.right * xDir * _acceleration + transform.forward * zDir * _acceleration;
 
         _myRigidbody.velocity = new Vector3(move.x * _speed, verticalVelocity, move.z * _speed);
     }
@@ -61,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
                 _PlayerIs3D = true;
 
             _PlayerBody.SetActive(_PlayerIs3D);
-            _DecalProjectorObject.SetActive(!_PlayerIs3D);
+           // _Player2D.SetActive(!_PlayerIs3D);
         }
     }
 }

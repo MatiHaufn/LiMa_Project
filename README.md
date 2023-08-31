@@ -1,6 +1,6 @@
 # LiMa_Project
 
-Das ist ein Projekt mit Linavalo Hinyemata. 
+Das ist ein Projekt mit Linavalo Hinyemata von 2023. 
 Wir haben zusammen beschlossen ein kleines, gemeinsames Projekt zu erstellen. 
 
 Mein Fokus ist es, einen Wechsel von einem 3D Charakter in 2D zu programmieren. Ich habe einige verschiedene Möglichkeiten versucht. 

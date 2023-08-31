@@ -12,3 +12,10 @@ Das Projekt befindet sich noch in Entwicklung.
 Das Ziel soll es sein, das Gebilde hinaufzukommen. 
 Das soll mit Hilfe von kleinen Rätseln durch mehrere 2D Passagen geschehen. 
 Das heißt, Spielende sollen von einer 3D Gestalt in 2D wechseln können und so über Abgründe rüber kommen können. 
+
+Spielende werden zurzeit sowohl 2D als auch 3D dargestellt. 
+Geplant ist, zwischen 2D und 3D durch einen Auslöser zu wechseln. 
+
+![ZeldaGYROAufnahme](https://github.com/MatiHaufn/LiMa_Project/assets/65949947/aeafbab1-5b25-4b5c-8568-04dc09b2c9de)
+
+

@@ -6,8 +6,8 @@ public class PlayerMovement2D : MonoBehaviour
     public float _acceleration;
 
     [SerializeField] Transform _groundCheck;
-    [SerializeField] float verticalVelocity = -1;
-    [SerializeField] float jumpForce = 1f; 
+    [SerializeField] float verticalVelocity;
+    [SerializeField] float jumpForce; 
 
     Rigidbody _myRigidbody; 
     Vector3 _move;
@@ -20,6 +20,7 @@ public class PlayerMovement2D : MonoBehaviour
     {
         _myRigidbody = GetComponent<Rigidbody>();
     }
+
     void Update()
     {
          _grounded = Physics.Raycast(_groundCheck.position, Vector3.down, 0.15f, _groundMask);
@@ -28,7 +29,6 @@ public class PlayerMovement2D : MonoBehaviour
             Debug.DrawRay(_groundCheck.position, Vector3.down * 0.15f, Color.red);
         else
             Debug.DrawRay(_groundCheck.position, Vector3.down * 0.15f, Color.green);
-            
 
         float xDir = Input.GetAxis("Horizontal");
 
@@ -37,8 +37,8 @@ public class PlayerMovement2D : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _grounded == true)
         {
-            Debug.Log("Jumpppp!!");
-            _myRigidbody.velocity = Vector3.up * jumpForce;
+            _myRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _grounded = false;
         }
     }
 

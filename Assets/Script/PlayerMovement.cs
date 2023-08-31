@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
+
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject _PlayerBody;
     [SerializeField] GameObject _Player2D;
     [SerializeField] GameObject _WallCollider;
-    bool _PlayerIs3D = true; 
+    [SerializeField] GameObject _GroundCheck;
+    [SerializeField] float _jumpForce;
 
-    //Player Movement
-    Rigidbody _myRigidbody;
-
-    public Vector3 move;
     public float _speed;
     public float _acceleration;
+    
+    //Player Movement
+    Rigidbody _myRigidbody;
+    Vector3 _move;
     float _startSpeed;
     float _halfSpeed;
-    float verticalVelocity = -1;
+    float _verticalVelocity = -1;
+    bool _PlayerIs3D = true;
 
     private void Start()
     {
@@ -27,11 +29,21 @@ public class PlayerMovement : MonoBehaviour
         _startSpeed = _speed;
         _halfSpeed = _speed * .75f;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
-        SwitchDimension(); 
+        SwitchDimension();
+
+        Debug.Log(_GroundCheck.GetComponent<GroundCheck>()._isGrounded());
+
+        if (Input.GetButtonDown("Jump") && _GroundCheck.GetComponent<GroundCheck>()._isGrounded())
+        {
+            _myRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        }
     }
+
+
+
     private void Move()
     {
         float xDir = Input.GetAxis("Horizontal");
@@ -45,9 +57,9 @@ public class PlayerMovement : MonoBehaviour
         else
             _speed = _startSpeed;
 
-        move = transform.right * xDir * _acceleration + transform.forward * zDir * _acceleration;
+        _move = transform.right * xDir * _acceleration + transform.forward * zDir * _acceleration;
 
-        _myRigidbody.velocity = new Vector3(move.x * _speed, verticalVelocity, move.z * _speed);
+        _myRigidbody.velocity = new Vector3(_move.x * _speed, _verticalVelocity, _move.z * _speed);
     }
 
     private void SwitchDimension()
